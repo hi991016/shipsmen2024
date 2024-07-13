@@ -1,5 +1,13 @@
 /* Utils
 ------------------------------------------------------------*/
+
+.dflex {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
 /* only device */
 
 .sp-only,
