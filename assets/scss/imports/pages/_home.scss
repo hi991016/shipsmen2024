@@ -154,6 +154,11 @@
         width: 100%;
       }
 
+      &.swiper-slide-active .js-ships-heading {
+        opacity: 1;
+        visibility: visible;
+      }
+
       @include maxW(1023px) {
         width: 100%;
 
@@ -258,6 +263,11 @@
       left: 77px;
       color: $white-cl;
       z-index: 10;
+
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+      transition-delay: 1s;
 
       &.is-dress-style {
         top: auto;
