@@ -71,6 +71,7 @@
       display: block;
       width: auto;
       height: auto;
+      transition: opacity 0.15s ease-in-out;
 
       &.swiper-button-next {
         margin-left: auto;
@@ -78,6 +79,10 @@
         svg {
           margin-left: auto;
         }
+      }
+
+      &.swiper-button-disabled {
+        opacity: 0;
       }
 
       svg {
@@ -93,6 +98,7 @@
       }
 
       &:after {
+        content: "";
         font-size: 0;
         border: 0;
       }
@@ -157,6 +163,7 @@
       &.swiper-slide-active .js-ships-heading {
         opacity: 1;
         visibility: visible;
+        transition-delay: 1.2s;
       }
 
       @include maxW(1023px) {
@@ -267,7 +274,6 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-      transition-delay: 1s;
 
       &.is-dress-style {
         top: auto;
@@ -291,6 +297,109 @@
         left: 30px !important;
         right: auto !important;
         bottom: auto !important;
+      }
+    }
+
+    &_footer {
+      &_inner {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-left: auto;
+        padding: 30px 6.94444vw 30px 30px;
+        text-align: right;
+
+        @include maxW(1023px) {
+          width: 100%;
+          padding: 25px 37px;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+
+      &_top {
+        width: 100%;
+        flex: 1;
+
+        @include maxW(1023px) {
+          flex: none;
+        }
+      }
+
+      &_backtotop {
+        p {
+          font-size: 1.5rem;
+          text-transform: uppercase;
+          cursor: pointer;
+        }
+
+        @include maxW(1023px) {
+          margin-top: 46px;
+        }
+      }
+
+      &_credit {
+        font-size: 1.4rem;
+        line-height: 1.8;
+
+        @include maxW(1023px) {
+          font-size: 1.2rem;
+        }
+      }
+
+      &_copyright {
+        margin-top: 50px;
+
+        h3 {
+          font-size: 1rem;
+          font-weight: 400;
+          text-transform: uppercase;
+        }
+
+        p {
+          font-family: "Zen Kaku Gothic New", sans-serif;
+          font-size: 1rem;
+          font-weight: 500;
+          line-height: 1.8;
+          margin-top: 16px;
+        }
+
+        @include maxW(1023px) {
+          margin-top: 40px;
+
+          p {
+            font-size: 1.1rem;
+            margin-top: 40px;
+          }
+        }
+      }
+
+      &_brand {
+        margin-top: 73px;
+        margin-right: -10px;
+        justify-content: flex-end;
+        display: grid;
+        grid-template-columns: repeat(3, 138px);
+
+        a:hover {
+          opacity: 1;
+        }
+
+        svg {
+          width: 100%;
+          margin-left: 1px;
+        }
+
+        @include maxW(1023px) {
+          margin-top: 60px;
+          margin-right: 0;
+          display: grid;
+          grid-template-columns: repeat(3, 118px);
+          justify-content: center;
+        }
       }
     }
   }

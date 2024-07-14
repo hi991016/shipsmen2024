@@ -12,7 +12,9 @@ window.addEventListener("resize", appHeight);
 
 // ===== main =====
 const main = () => {
-  const swiperShips = new Swiper(".js-ships-swiper", {
+  const jsSwiper = document.querySelector(".js-ships-swiper");
+
+  const shipsSwiper = new Swiper(jsSwiper, {
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
@@ -30,6 +32,13 @@ const main = () => {
       },
     },
     on: {},
+  });
+
+  // back to top
+  document.body.addEventListener("click", function (event) {
+    if (event.target.classList.contains("js-backtotop")) {
+      shipsSwiper.slideTo(0, 1200);
+    }
   });
 };
 
