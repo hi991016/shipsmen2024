@@ -14,6 +14,8 @@ window.addEventListener("resize", appHeight);
 const main = () => {
   // query
   const sidebarControl = document.querySelector(".js-sidebar-control");
+  const sidebarStyleDress = document.querySelector(".js-sidebar-dress");
+  const sidebarStyleCasual = document.querySelector(".js-sidebar-casual");
 
   // init swiper
   new Swiper(".js-mainvisual-swiper", {
@@ -51,6 +53,25 @@ const main = () => {
           sidebarControl.classList.add("hide");
         }
       },
+      slideChange: (sw) => {
+        const index_currentSlide = sw.realIndex;
+        const currentSlide =
+          index_currentSlide > 0
+            ? sw.slides[index_currentSlide - 1]
+            : sw.slides[index_currentSlide];
+
+        if (currentSlide.classList.contains("js-style-casual")) {
+          sidebarStyleDress.classList.remove("active");
+          sidebarStyleCasual.classList.add("active");
+        } else if (currentSlide.classList.contains("js-style-both")) {
+          sidebarStyleDress.classList.add("active");
+          sidebarStyleCasual.classList.add("active");
+        } else {
+          sidebarStyleDress.classList.add("active");
+          sidebarStyleCasual.classList.remove("active");
+        }
+        //
+      },
     },
   });
 
@@ -70,7 +91,7 @@ const main = () => {
 
   // slideChange
   if (window.innerWidth < 1024) {
-    shipsSwiper.on("slideChange", function (sw) {
+    shipsSwiper.on("slideChange", (sw) => {
       if (sw.realIndex === 0) {
         sidebarControl.classList.add("hide");
       } else {
@@ -80,7 +101,7 @@ const main = () => {
   }
 
   // back to top
-  document.body.addEventListener("click", function (event) {
+  document.body.addEventListener("click", (event) => {
     if (event.target.classList.contains("js-backtotop")) {
       window.innerWidth > 1023
         ? shipsSwiper.slideTo(2, 1200)

@@ -1,11 +1,10 @@
 /* Utils
 ------------------------------------------------------------*/
 
-.dflex {
-  display: flex;
-  align-items: center;
-  position: relative;
-  height: 100%;
+.js-ships-fade {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
 /* only device */
