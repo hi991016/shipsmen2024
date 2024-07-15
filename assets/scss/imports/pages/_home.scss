@@ -80,8 +80,13 @@
       height: auto;
       transition: opacity 0.15s ease-in-out;
 
+      &.swiper-button-prev {
+        margin-right: auto;
+      }
+
       &.swiper-button-next {
         margin-left: auto;
+        text-align: right;
 
         svg {
           margin-left: auto;

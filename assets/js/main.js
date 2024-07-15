@@ -110,6 +110,32 @@ const main = () => {
   });
 };
 
+// ===== popup ====
+// close
+const closePopup = (popupId) => {
+  const popup = document.getElementById(popupId);
+  popup.classList.remove("--show");
+};
+const closePopupAll = () => {
+  const popups = document.querySelectorAll(".popup");
+  popups.forEach((item) => {
+    item.classList.remove("--show");
+  });
+};
+
+// show
+const itemElements = document.querySelectorAll(".js-data-items");
+itemElements.forEach((itemElement) => {
+  const itemNumber = itemElement.getAttribute("data-items");
+  const popupElement = document.getElementById("js-popup" + itemNumber);
+  itemElement.addEventListener("click", () => {
+    closePopupAll();
+    if (popupElement) {
+      popupElement.classList.add("--show");
+    }
+  });
+});
+
 window.onload = () => {
   document.body.classList.remove("fadeout");
   appHeight();
