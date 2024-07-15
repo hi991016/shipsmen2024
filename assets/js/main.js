@@ -17,6 +17,7 @@ const sidebarStyleDress = document.querySelector(".js-sidebar-dress");
 const sidebarStyleCasual = document.querySelector(".js-sidebar-casual");
 const groupPrevBtn = document.querySelector(".custom-prev-btn");
 const firstviewPrevBtn = document.querySelector(".custom-prev-firstview");
+const slideFirstGroup = document.querySelector(".slide-group-first");
 
 // ===== main =====
 const main = () => {
@@ -51,6 +52,13 @@ const main = () => {
       },
     },
     on: {
+      init: (sw) => {
+        if (sw.realIndex === 0) {
+          slideFirstGroup.classList.add("--hide");
+        } else {
+          slideFirstGroup.classList.remove("--hide");
+        }
+      },
       slideChange: (sw) => {
         const index_currentSlide = sw.realIndex;
         const currentSlide = sw.slides[index_currentSlide];
@@ -94,6 +102,15 @@ const main = () => {
         allowTouchMove: false,
         slidesPerView: 1,
         slidesPerGroup: 1,
+      },
+    },
+    on: {
+      slideChange: (sw) => {
+        if (sw.realIndex === 1) {
+          slideFirstGroup.classList.remove("--hide");
+        } else {
+          slideFirstGroup.classList.add("--hide");
+        }
       },
     },
   });
