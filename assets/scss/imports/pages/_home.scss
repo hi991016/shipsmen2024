@@ -79,9 +79,14 @@
       width: auto;
       height: auto;
       transition: opacity 0.15s ease-in-out;
+      cursor: pointer;
 
       &.swiper-button-prev {
         margin-right: auto;
+
+        &.is-hide {
+          display: none;
+        }
       }
 
       &.swiper-button-next {
@@ -231,7 +236,7 @@
   // ===== ships =====
   .ships {
     &_container {
-      width: calc(100vw - 190px);
+      width: 100vw;
       height: var(--app-height);
       margin-left: auto;
 
@@ -245,6 +250,17 @@
       height: 100%;
       overflow: hidden;
       position: relative;
+    }
+
+    &_group_swiper {
+      width: calc(100vw - 190px);
+      height: var(--app-height);
+      margin-left: auto;
+
+      @include maxW(1023px) {
+        width: 100%;
+        margin: 0 auto;
+      }
     }
 
     &_slide {
