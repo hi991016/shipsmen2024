@@ -27,6 +27,11 @@
         transform: translateY(-50%);
         padding: 0 19px;
         mix-blend-mode: difference;
+
+        &.--hide {
+          opacity: 0;
+          pointer-events: none;
+        }
       }
     }
 
@@ -256,6 +261,7 @@
       width: calc(100vw - 190px);
       height: var(--app-height);
       margin-left: auto;
+      background-color: $white-cl;
 
       @include maxW(1023px) {
         width: 100%;

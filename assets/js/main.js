@@ -10,13 +10,16 @@ const appHeight = () => {
 };
 window.addEventListener("resize", appHeight);
 
+// ===== query =====
+const sidebar = document.querySelector(".js-sidebar");
+const sidebarControl = document.querySelector(".js-sidebar-control");
+const sidebarStyleDress = document.querySelector(".js-sidebar-dress");
+const sidebarStyleCasual = document.querySelector(".js-sidebar-casual");
+const groupPrevBtn = document.querySelector(".custom-prev-btn");
+const firstviewPrevBtn = document.querySelector(".custom-prev-firstview");
+
 // ===== main =====
 const main = () => {
-  // query
-  const sidebarControl = document.querySelector(".js-sidebar-control");
-  const sidebarStyleDress = document.querySelector(".js-sidebar-dress");
-  const sidebarStyleCasual = document.querySelector(".js-sidebar-casual");
-
   // init swiper
   new Swiper(".js-mainvisual-swiper", {
     loop: true,
@@ -65,11 +68,11 @@ const main = () => {
         }
         // ====
         if (index_currentSlide === 0) {
-          document.querySelector(".custom-prev-btn").style.display = "none"
-          document.querySelector(".custom-prev-firstview").style.display = "block"
+          groupPrevBtn.style.display = "none";
+          firstviewPrevBtn.style.display = "block";
         } else {
-          document.querySelector(".custom-prev-btn").style.display = "block"
-          document.querySelector(".custom-prev-firstview").style.display = "none"
+          groupPrevBtn.style.display = "block";
+          firstviewPrevBtn.style.display = "none";
         }
       },
     },
@@ -121,7 +124,7 @@ const main = () => {
 
   // event next/prev
   const prevs = document.querySelector(".custom-prev-firstview");
-  prevs.addEventListener("click", function () {
+  prevs.addEventListener("click", () => {
     shipsSwiper.slidePrev();
   });
 
@@ -140,6 +143,7 @@ const closePopup = (popupId) => {
   popup.classList.remove("--show");
 };
 const closePopupAll = () => {
+  sidebar.classList.remove("--hide");
   const popups = document.querySelectorAll(".popup");
   popups.forEach((item) => {
     item.classList.remove("--show");
@@ -154,6 +158,7 @@ itemElements.forEach((itemElement) => {
   itemElement.addEventListener("click", () => {
     closePopupAll();
     if (popupElement) {
+      sidebar.classList.add("--hide");
       popupElement.classList.add("--show");
     }
   });
