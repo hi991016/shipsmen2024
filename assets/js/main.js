@@ -11,13 +11,17 @@ const appHeight = () => {
 window.addEventListener("resize", appHeight);
 
 // ===== query =====
-const sidebar = document.querySelector(".js-sidebar");
-const sidebarControl = document.querySelector(".js-sidebar-control");
-const sidebarStyleDress = document.querySelector(".js-sidebar-dress");
-const sidebarStyleCasual = document.querySelector(".js-sidebar-casual");
-const groupPrevBtn = document.querySelector(".custom-prev-btn");
-const firstviewPrevBtn = document.querySelector(".custom-prev-firstview");
-const slideFirstGroup = document.querySelector(".slide-group-first");
+const [sidebar, sidebarControl, styleDress, styleCasual, slideGroupFirst] = [
+  document.querySelector("[data-sidebar]"),
+  document.querySelector("[data-sidebar-control]"),
+  document.querySelector("[data-sidebar-dress]"),
+  document.querySelector("[data-sidebar-casual]"),
+  document.querySelector("[data-group-heading]"),
+];
+const [prevsFirstView, prevsGroup] = [
+  document.querySelector("[btn-prevs-firstview]"),
+  document.querySelector("[btn-prevs-group]"),
+];
 
 // ===== main =====
 const main = () => {
@@ -54,9 +58,9 @@ const main = () => {
     on: {
       init: (sw) => {
         if (sw.realIndex === 0) {
-          slideFirstGroup.classList.add("--hide");
+          slideGroupFirst.classList.add("--hide");
         } else {
-          slideFirstGroup.classList.remove("--hide");
+          slideGroupFirst.classList.remove("--hide");
         }
       },
       slideChange: (sw) => {
@@ -64,23 +68,31 @@ const main = () => {
         const currentSlide = sw.slides[index_currentSlide];
 
         // ====
-        if (currentSlide.classList.contains("js-style-casual")) {
-          sidebarStyleDress.classList.remove("active");
-          sidebarStyleCasual.classList.add("active");
-        } else if (currentSlide.classList.contains("js-style-both")) {
-          sidebarStyleDress.classList.add("active");
-          sidebarStyleCasual.classList.add("active");
-        } else {
-          sidebarStyleDress.classList.add("active");
-          sidebarStyleCasual.classList.remove("active");
+        switch (true) {
+          case currentSlide.hasAttribute("style-dress"):
+            styleDress.classList.add("active");
+            styleCasual.classList.remove("active");
+            break;
+          case currentSlide.hasAttribute("style-casual"):
+            styleDress.classList.remove("active");
+            styleCasual.classList.add("active");
+            break;
+          case currentSlide.hasAttribute("style-both"):
+            styleDress.classList.add("active");
+            styleCasual.classList.add("active");
+            break;
+
+          default:
+            break;
         }
+
         // ====
         if (index_currentSlide === 0) {
-          groupPrevBtn.style.display = "none";
-          firstviewPrevBtn.style.display = "block";
+          prevsGroup.style.display = "none";
+          prevsFirstView.style.display = "block";
         } else {
-          groupPrevBtn.style.display = "block";
-          firstviewPrevBtn.style.display = "none";
+          prevsGroup.style.display = "block";
+          prevsFirstView.style.display = "none";
         }
       },
     },
@@ -107,17 +119,19 @@ const main = () => {
     on: {
       slideChange: (sw) => {
         if (sw.realIndex === 1) {
-          slideFirstGroup.classList.remove("--hide");
+          slideGroupFirst.classList.remove("--hide");
         } else {
-          slideFirstGroup.classList.add("--hide");
+          slideGroupFirst.classList.add("--hide");
         }
       },
     },
   });
 
   // enter slide
-  const dressBtn = document.querySelector("#js-dress");
-  const casualBtn = document.querySelector("#js-casual");
+  const [dressBtn, casualBtn] = [
+    document.querySelector("[btn-dress-enter]"),
+    document.querySelector("[btn-casual-enter]"),
+  ];
   dressBtn.addEventListener("click", () => {
     shipsSwiper.slideNext();
   });
@@ -125,7 +139,7 @@ const main = () => {
     shipsSwiper.slideTo(1, 600);
     setTimeout(() => {
       groupSwiper.slideTo(4, 1200);
-    }, 500);
+    }, 600);
   });
 
   // slideChange
@@ -140,14 +154,13 @@ const main = () => {
   }
 
   // event next/prev
-  const prevs = document.querySelector(".custom-prev-firstview");
-  prevs.addEventListener("click", () => {
+  prevsFirstView.addEventListener("click", () => {
     shipsSwiper.slidePrev();
   });
 
   // back to top
   document.body.addEventListener("click", (event) => {
-    if (event.target.classList.contains("js-backtotop")) {
+    if (event.target.hasAttribute("data-btn-backtotop")) {
       groupSwiper.slideTo(0, 1200);
     }
   });
@@ -155,23 +168,19 @@ const main = () => {
 
 // ===== popup ====
 // close
-const closePopup = (popupId) => {
-  const popup = document.getElementById(popupId);
-  popup.classList.remove("--show");
-};
 const closePopupAll = () => {
   sidebar.classList.remove("--hide");
-  const popups = document.querySelectorAll(".popup");
+  const popups = document.querySelectorAll("[data-popup]");
   popups.forEach((item) => {
     item.classList.remove("--show");
   });
 };
 
 // show
-const itemElements = document.querySelectorAll(".js-data-items");
+const itemElements = document.querySelectorAll("[data-items]");
 itemElements.forEach((itemElement) => {
   const itemNumber = itemElement.getAttribute("data-items");
-  const popupElement = document.getElementById("js-popup" + itemNumber);
+  const popupElement = document.querySelector(`[data-popup="${itemNumber}"]`);
   itemElement.addEventListener("click", () => {
     closePopupAll();
     if (popupElement) {
