@@ -269,11 +269,19 @@
         transition-delay: 1.2s;
       }
 
-      .slide-group-first {
+      .is-dress-style {
         &.--hide {
           opacity: 0 !important;
           visibility: hidden !important;
           transition-delay: 0s !important;
+        }
+      }
+
+      @include minW(1024px) {
+        .swiper-slide-prev .js-group-fade {
+          opacity: 1;
+          visibility: visible;
+          transition-delay: 1.2s;
         }
       }
 

@@ -137,9 +137,15 @@ const main = () => {
   });
   casualBtn.addEventListener("click", () => {
     shipsSwiper.slideTo(1, 600);
-    setTimeout(() => {
-      groupSwiper.slideTo(4, 1200);
-    }, 600);
+    if (window.innerWidth < 1024) {
+      setTimeout(() => {
+        groupSwiper.slideTo(9, 1200);
+      }, 600);
+    } else {
+      setTimeout(() => {
+        groupSwiper.slideTo(10, 1200);
+      }, 600);
+    }
   });
 
   // slideChange
@@ -188,6 +194,11 @@ itemElements.forEach((itemElement) => {
       popupElement.classList.add("--show");
     }
   });
+});
+
+// ===== lazy loading =====
+const ll = new LazyLoad({
+  threshold: 0,
 });
 
 window.onload = () => {
